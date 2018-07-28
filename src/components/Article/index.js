@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import CommentList from '../CommentList';
 import toggleOpen from '../../decorators/toggleOpen';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {connect} from 'react-redux';
+import {deleteArticle} from '../../AC'
 import './style.css';
 
-class Index extends PureComponent{
+class Article extends PureComponent{
   static propTypes = {
     article: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -30,6 +32,7 @@ class Index extends PureComponent{
         <button onClick = {toggleOpen}>
           {isOpen ? 'close' : 'open'}
         </button>
+        <button onClick = {this.handleDelete}>delete me</button>
         <ReactCSSTransitionGroup
           transitionAppear={true}
           transitionAppearTimeout={500}
@@ -40,6 +43,12 @@ class Index extends PureComponent{
         </ReactCSSTransitionGroup>
       </div>
     )
+  }
+
+  handleDelete = () => {
+    const {deleteArticle, article} = this.props
+    deleteArticle(article.id)
+    console.log('delete me');
   }
 
   setContainerRef = ref => {
@@ -70,4 +79,4 @@ class Index extends PureComponent{
 
 }
 
-export default Index
+export default connect(null, { deleteArticle })(Article)
