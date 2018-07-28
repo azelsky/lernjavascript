@@ -1,7 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import ArticleList from './components/ArticleList';
-import {articles} from './fixtures'
+import Root from './components/Root';
+import {articles} from './fixtures';
 
-
-render(<ArticleList articles = {articles} />, document.getElementById('root'));
+render(<Root articles = {articles}/>, document.getElementById('root'));
