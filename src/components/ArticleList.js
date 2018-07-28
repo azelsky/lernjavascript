@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Index from './Article/index';
+import Article from './Article/index';
 import accordion from '../decorators/accordion';
 import PropTypes from 'prop-types'
 
@@ -15,7 +15,7 @@ class ArticleList extends Component{
     const {articles, toggleOpenItem, openItemId} = this.props
     const articleElements = articles.map(
         (article) => <li key = {article.id}>
-          <Index
+          <Article
             article = {article}
             isOpen = {article.id === openItemId}
             toggleOpen = {toggleOpenItem(article.id)}
