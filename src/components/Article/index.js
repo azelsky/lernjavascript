@@ -47,8 +47,7 @@ class Article extends PureComponent{
 
   handleDelete = () => {
     const {deleteArticle, article} = this.props
-    deleteArticle(article.id)
-    console.log('delete me');
+    deleteArticle(article.id);
   }
 
   setContainerRef = ref => {
@@ -79,4 +78,4 @@ class Article extends PureComponent{
 
 }
 
-export default connect(null, { deleteArticle })(Article)
+export default Article
