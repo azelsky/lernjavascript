@@ -4,6 +4,7 @@ import accordion from '../decorators/accordion';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {deleteArticle} from "../AC";
+import {filtratedArticlesSelector} from '../selectors'
 
 class ArticleList extends Component{
   static propTypes = {
@@ -15,6 +16,7 @@ class ArticleList extends Component{
   }
 
   render(){
+    console.log('i\'m reload')
     const {articles, toggleOpenItem, openItemId} = this.props
     const articleElements = articles.map(
         (article) => <li key = {article.id}>
@@ -23,7 +25,7 @@ class ArticleList extends Component{
             isOpen = {article.id === openItemId}
             toggleOpen = {toggleOpenItem(article.id)}
             deleteArticle = {this.props.deleteArticle}
-          /> 
+          />
         </li>
     )
 
@@ -37,16 +39,8 @@ class ArticleList extends Component{
 
 }
 
-export default connect(({filters, articles}) => {
-    const {selected, dateRange: {from, to}} = filters
-
-    const filteredArticles = articles.filter(article => {
-        const published = Date.parse(article.date)
-        return (!selected.length || selected.includes(article.id)) &&
-            (!from || !to || (published > from && published < to))
-    })
-
+export default connect((state) => {
     return {
-        articles: filteredArticles
+        articles: filtratedArticlesSelector(state)
     }
 }, {deleteArticle})(accordion(ArticleList))

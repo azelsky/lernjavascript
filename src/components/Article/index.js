@@ -1,10 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import CommentList from '../CommentList';
-import toggleOpen from '../../decorators/toggleOpen';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {connect} from 'react-redux';
-import {deleteArticle} from '../../AC'
+
 import './style.css';
 
 class Article extends PureComponent{
@@ -25,7 +23,7 @@ class Article extends PureComponent{
 
   render() {
     const {article, isOpen, toggleOpen} = this.props;
-    console.log('update article');
+    //console.log('update article');
     return(
       <div ref = {this.setContainerRef}>
         <h3>{article.title}</h3>
@@ -52,11 +50,11 @@ class Article extends PureComponent{
 
   setContainerRef = ref => {
     this.container = ref;
-    console.log('---', ref)
+    //console.log('---', ref)
   }
   
   componentDidMount() {
-    console.log('---', 'mounted');
+    //console.log('---', 'mounted');
   }
 
   getBody(){
