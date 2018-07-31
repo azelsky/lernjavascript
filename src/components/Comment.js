@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-function Comment({comment}){
+function Comment(props){
+    const {comment} = props;
     return(
             <div>{comment.text} <b>by {comment.user}</b></div>
     )
 }
 
 Comment.propTypes = {
-    id: PropTypes.string.isRequired,
+    //id: PropTypes.string.isRequired,
     //from connect
     comment: PropTypes.shape({
         text: PropTypes.string.isRequired,
@@ -17,9 +18,10 @@ Comment.propTypes = {
     }).isRequired
 }
 
-export default connect((state, ownProps) => {
-    return {
-        comment: state.comments.find(comment => comment.id === ownProps.id)
-    }
-})(Comment)
+export default Comment
+// connect((state, ownProps) => {
+//     return {
+//         comment: state.comments.find(comment => comment.id === ownProps.id)
+//     }
+// })(Comment)
 

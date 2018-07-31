@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Comment from './Comment';
 import toggleOpen from '../decorators/toggleOpen';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 class CommentList extends Component{
     static defaultProps = {
@@ -16,7 +17,6 @@ class CommentList extends Component{
 
     render(){
         const text = this.props.isOpen ? 'Hide Comments' : 'Show Comments';
-        
         return(
             <div>
                 <button onClick = {this.props.toggleOpen}>
@@ -35,11 +35,14 @@ class CommentList extends Component{
         }
         return (
             <ul>
-                {comments.map((id) => <li key = {id}><Comment id = {id}/></li>)}
+                {comments.map((id) => <li key = {id}><Comment comment={ this.props.comment.find(comment => comment.id === id)}/></li>)}
             </ul>
         )
     }
-
 }
 
-export default toggleOpen(CommentList);
+export default connect(state => {
+    return {
+        comment: state.comments
+    }
+})(toggleOpen(CommentList));
