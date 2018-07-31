@@ -35,14 +35,10 @@ class CommentList extends Component{
         }
         return (
             <ul>
-                {comments.map((id) => <li key = {id}><Comment comment={ this.props.comment.find(comment => comment.id === id)}/></li>)}
+                {comments.map((id) => <li key = {id}><Comment id={ id }/></li>)}
             </ul>
         )
     }
 }
 
-export default connect(state => {
-    return {
-        comment: state.comments
-    }
-})(toggleOpen(CommentList));
+export default toggleOpen(CommentList);

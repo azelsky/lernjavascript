@@ -10,7 +10,7 @@ function Comment(props){
 }
 
 Comment.propTypes = {
-    //id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     //from connect
     comment: PropTypes.shape({
         text: PropTypes.string.isRequired,
@@ -18,10 +18,9 @@ Comment.propTypes = {
     }).isRequired
 }
 
-export default Comment
-// connect((state, ownProps) => {
-//     return {
-//         comment: state.comments.find(comment => comment.id === ownProps.id)
-//     }
-// })(Comment)
+export default connect((state, ownProps) => {
+    return {
+        comment: state.comments.find(comment => comment.id === ownProps.id)
+    }
+})(Comment)
 
