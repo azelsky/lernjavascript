@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Comment from './Comment';
 import toggleOpen from '../decorators/toggleOpen';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 
 class CommentList extends Component{
     static defaultProps = {
