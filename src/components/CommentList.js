@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Comment from './Comment';
 import toggleOpen from '../decorators/toggleOpen';
 import PropTypes from 'prop-types';
+import CommentForm from './CommentForm'
 
 class CommentList extends Component{
     static defaultProps = {
@@ -26,16 +27,24 @@ class CommentList extends Component{
         )
     }
     getBody(){
-        const {comments, isOpen} = this.props;
+        const {article: {comments = [], id}, isOpen} = this.props;
         if(isOpen === false) return null
 
         if(!comments.length){
-            return <div><b>no comments yet</b></div>;
+            return( 
+                <div>
+                    <b>no comments yet</b>
+                    <CommentForm articleId = {id} />
+                </div>
+            )
         }
         return (
-            <ul>
-                {comments.map((id) => <li key = {id}><Comment id={ id }/></li>)}
-            </ul>
+            <div>
+                <ul>
+                    {comments.map((id) => <li key = {id}><Comment id={ id }/></li>)}
+                </ul>
+                <CommentForm articleId = {id} />
+            </div>
         )
     }
 }
